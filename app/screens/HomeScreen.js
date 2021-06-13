@@ -26,7 +26,7 @@ class HomeScreen extends React.Component {
       activeIndex: 0,
       carouselItems: [
         {
-          title: "Item 1",
+          title: "Nike Joyride",
           text: "Text 1",
         },
         {
@@ -86,26 +86,7 @@ class HomeScreen extends React.Component {
 
 const Stack = createStackNavigator();
 
-export default () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="HomeScreenMain"
-        component={HomeScreen}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="DetailScreen"
-        component={ItemDetailScreen}
-        options={{
-          headerShown: false,
-        }}
-      />
-    </Stack.Navigator>
-  );
-};
+export default HomeScreen;
 
 const styles = StyleSheet.create({
   main: {

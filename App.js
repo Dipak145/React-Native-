@@ -12,7 +12,6 @@ import ProfileShop from "./app/screens/profileShop";
 import { NavigationContainer } from "@react-navigation/native";
 import MainScreen from "./app/screens/MainScreen";
 import { createStackNavigator } from "@react-navigation/stack";
-import ItemDetailScreen from "./app/components/ItemDetailScreen";
 
 const isUserLogged = true;
 
@@ -22,16 +21,7 @@ export default function App() {
   return (
     <NavigationContainer>
       {isUserLogged ? (
-        <Stack.Navigator>
-          <Stack.Screen
-            name="MainScreen"
-            options={{
-              headerShown: false,
-            }}
-            component={MainScreen}
-          />
-          <Stack.Screen name="ItemDetailScreen" component={ItemDetailScreen} />
-        </Stack.Navigator>
+        <MainScreen />
       ) : (
         <View style={styles.container}>
           {/* <RegisterScreen /> */}
