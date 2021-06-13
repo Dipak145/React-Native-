@@ -9,18 +9,41 @@ import ForgetPassword from "./app/screens/forgotPassword";
 import ResetPassword from "./app/screens/resetPassword";
 import HomeScreen from "./app/screens/HomeScreen";
 import ProfileShop from "./app/screens/profileShop";
+import { NavigationContainer } from "@react-navigation/native";
+import MainScreen from "./app/screens/MainScreen";
+import { createStackNavigator } from "@react-navigation/stack";
+import ItemDetailScreen from "./app/components/ItemDetailScreen";
+
+const isUserLogged = true;
+
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      {/* <RegisterScreen /> */}
-      {/* <LoginScreen /> */}
-      {/* <Verification /> */}
-      {/* <ForgetPassword /> */}
-      {/* <ResetPassword /> */}
-      <ProfileShop />
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      {isUserLogged ? (
+        <Stack.Navigator>
+          <Stack.Screen
+            name="MainScreen"
+            options={{
+              headerShown: false,
+            }}
+            component={MainScreen}
+          />
+          <Stack.Screen name="ItemDetailScreen" component={ItemDetailScreen} />
+        </Stack.Navigator>
+      ) : (
+        <View style={styles.container}>
+          {/* <RegisterScreen /> */}
+          {/* <LoginScreen /> */}
+          {/* <Verification /> */}
+          {/* <ForgetPassword /> */}
+          {/* <ResetPassword /> */}
+          <ProfileShop />
+          <StatusBar style="auto" />
+        </View>
+      )}
+    </NavigationContainer>
   );
 }
 

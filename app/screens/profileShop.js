@@ -25,7 +25,7 @@ import * as Yup from "yup";
 import StatusBarScreen from "../components/StatusBarScreen";
 import ImageViewer from "../components/ImageViewer";
 
-export default class profileShop extends Component {
+export default class ProfileShop extends Component {
   state = {
     modalVisible: false,
     modalImage: require("../img/image1.jpg"),

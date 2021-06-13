@@ -1,82 +1,124 @@
-import React, { useState, useEffect } from "react";
-import * as Font from "expo-font";
+import React from "react";
 import {
-  Image,
   View,
   StyleSheet,
   Text,
-  TextInput,
-  ImageBackground,
+  Dimensions,
   TouchableOpacity,
 } from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import * as ImagePicker from "expo-image-picker";
-import AppText from "../components/AppText";
-import AppTextInput from "../components/AppTextInput";
-import AppButton from "../components/AppButton";
-import { Formik } from "formik";
-import ErrorMessage from "../components/ErrorMessage";
-import * as Yup from "yup";
-import StatusBarScreen from "../components/StatusBarScreen";
+import HomeScreenCard from "../components/HomeScreenCard";
+import Carousel from "react-native-snap-carousel";
+import { createStackNavigator } from "@react-navigation/stack";
+import ItemDetailScreen from "../components/ItemDetailScreen";
+import AppStatusBar from "../components/AppStatusBar";
 
-function homeScreen() {
-  return (
-    <StatusBarScreen>
-      <View style={styles.upperComponent}>
-        <Image style={styles.logo} source={require("../assets/profile.png")} />
-        <AppText style={styles.name}>David W</AppText>
-        <View style={styles.pointComponent}>
-          <View style={styles.points}>
-            <AppText>Points</AppText>
-            <AppText>45</AppText>
-          </View>
-          <Image
-            style={styles.pointsLogo}
-            source={require("../assets/points.png")}
-          />
-        </View>
+class HomeScreen extends React.Component {
+  _navigation = this.props.navigation;
+
+  constructor(props) {
+    super(props);
+
+    this.widht = Dimensions.get("window").width;
+    this.itemWidth = (this.widht * 80) / 100;
+    console.log(this.itemWidth);
+
+    this.state = {
+      activeIndex: 0,
+      carouselItems: [
+        {
+          title: "Item 1",
+          text: "Text 1",
+        },
+        {
+          title: "Item 2",
+          text: "Text 2",
+        },
+        {
+          title: "Item 3",
+          text: "Text 3",
+        },
+        {
+          title: "Item 4",
+          text: "Text 4",
+        },
+        {
+          title: "Item 5",
+          text: "Text 5",
+        },
+      ],
+    };
+  }
+
+  _renderItem = ({ item, index }) => {
+    console.log("Item " + item + " and index " + index);
+
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          this._navigation.navigate("DetailScreen");
+        }}
+      >
+        <HomeScreenCard />
+      </TouchableOpacity>
+    );
+  };
+
+  render() {
+    return (
+      <View style={styles.main}>
+        <AppStatusBar />
+        <Text style={styles.newsTitle}>NEWS</Text>
+        <Carousel
+          loop={true}
+          sliderWidth={this.widht}
+          ref={(c) => {
+            this._carousel = c;
+          }}
+          data={this.state.carouselItems}
+          itemWidth={this.itemWidth}
+          renderItem={this._renderItem}
+          layout={"default"}
+        />
       </View>
-    </StatusBarScreen>
-  );
+    );
+  }
 }
 
-export default homeScreen;
+const Stack = createStackNavigator();
+
+export default () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="HomeScreenMain"
+        component={HomeScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="DetailScreen"
+        component={ItemDetailScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
 
 const styles = StyleSheet.create({
-  upperComponent: {
-    width: "100%",
-    height: 90,
-    backgroundColor: "dodgerblue",
-    display: "flex",
-    flexDirection: "row",
-  },
-  logo: {
-    height: 100,
-    width: 100,
-    borderRadius: 50,
-  },
-  name: {
-    alignSelf: "center",
-  },
-  points: {
-    display: "flex",
-    alignItems: "center",
+  main: {
     justifyContent: "center",
-    flexGrow: 1,
-    alignSelf: "center",
-    marginLeft: 60, // not set properly
-  },
-  pointsLogo: {
-    height: 80,
-    width: 80,
-    borderRadius: 40,
-  },
-  pointComponent: {
-    display: "flex",
     alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "row",
-    flexGrow: 1,
+    flex: 1,
+    backgroundColor: "#01011f",
+  },
+
+  newsTitle: {
+    color: "white",
+    alignSelf: "flex-start",
+    margin: 15,
+    fontSize: 18,
   },
 });
