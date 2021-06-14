@@ -37,7 +37,7 @@ function DetailScreenMediaCard(props) {
 
 const styles = StyleSheet.create({
   main: {
-    height: "85%",
+    flex: 1,
     overflow: "hidden",
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   },
 
   progressBarMain: {
-    padding: 7,
+    padding: 10,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
@@ -73,8 +73,8 @@ const styles = StyleSheet.create({
 
   timer: {
     color: "white",
-    margin: 5,
-    fontSize: 12,
+    marginHorizontal: 10,
+    fontSize: 10,
   },
 
   videoIcon: {
