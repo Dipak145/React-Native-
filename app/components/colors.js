@@ -7,4 +7,5 @@ export default {
   light: "#e9e9e9",
   rightSwipe: "#ff726f",
   disabled: "#cfd8dc",
+  accent: "#171732",
 };

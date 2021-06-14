@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import * as Font from "expo-font";
 import {
   Image,
   View,
   StyleSheet,
   Text,
-  TextInput,
   ImageBackground,
   TouchableOpacity,
 } from "react-native";
@@ -17,6 +16,7 @@ import { Formik } from "formik";
 import ErrorMessage from "../components/ErrorMessage";
 import * as Yup from "yup";
 import StatusBarScreen from "../components/StatusBarScreen";
+import { TextInput } from "react-native-paper";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label("* Email"),
@@ -24,6 +24,8 @@ const validationSchema = Yup.object().shape({
 });
 
 function LoginScreen() {
+  const [text, setText] = useState("Email");
+
   return (
     <StatusBarScreen>
       <ImageBackground
@@ -39,8 +41,11 @@ function LoginScreen() {
             />
           </View>
           <View style={styles.input}>
-            <AppTextInput placeholder="EMAIL" />
-            <AppTextInput placeholder="PASSWORD" />
+            <TextInput
+              label="Email"
+              value={text}
+              onChangeText={(t) => setText(t)}
+            />
           </View>
 
           <View>
@@ -74,7 +79,7 @@ const styles = StyleSheet.create({
   input: {
     justifyContent: "center",
     alignItems: "center",
-    display: "flex",
+    width: "100%",
   },
   text: {
     display: "flex",

@@ -9,7 +9,6 @@ import {
 import HomeScreenCard from "../components/HomeScreenCard";
 import Carousel from "react-native-snap-carousel";
 import { createStackNavigator } from "@react-navigation/stack";
-import ItemDetailScreen from "../components/ItemDetailScreen";
 import AppStatusBar from "../components/AppStatusBar";
 
 class HomeScreen extends React.Component {

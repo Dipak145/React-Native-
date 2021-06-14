@@ -5,6 +5,7 @@ import { AntDesign } from "@expo/vector-icons";
 import ResponseButton from "../components/ResponseButton";
 import Constants from "expo-constants";
 import { useNavigation } from "@react-navigation/native";
+import DetailScreenMediaCard from "./DetailScreenMediaCard";
 
 function ItemDetailScreen(props) {
   const [isLiked, setLiked] = useState(false);
@@ -15,6 +16,7 @@ function ItemDetailScreen(props) {
     <View style={styles.main}>
       <ImageBackground
         style={styles.imageBackground}
+        resizeMode="stretch"
         source={require("../assets/shoe.jpg")}
       >
         <AntDesign
@@ -80,6 +82,9 @@ function ItemDetailScreen(props) {
             )}
           </ResponseButton>
         </View>
+        <View style={styles.mediaContainer}>
+          <DetailScreenMediaCard />
+        </View>
       </View>
     </View>
   );
@@ -99,6 +104,12 @@ const styles = StyleSheet.create({
   textColor: {
     color: "white",
     margin: 3,
+  },
+
+  mediaContainer: {
+    flex: 1,
+    padding: 15,
+    justifyContent: "flex-end",
   },
 
   likeDislike: {

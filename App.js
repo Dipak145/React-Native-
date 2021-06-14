@@ -1,47 +1,17 @@
-import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import Temp from "./app/components/temp";
-import LoginScreen from "./app/screens/loginScreen";
-import RegisterScreen from "./app/screens/registerScreen";
-import Verification from "./app/screens/verification";
-import ForgetPassword from "./app/screens/forgotPassword";
-import ResetPassword from "./app/screens/resetPassword";
-import HomeScreen from "./app/screens/HomeScreen";
-import ProfileShop from "./app/screens/profileShop";
+import React, { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import MainScreen from "./app/screens/MainScreen";
-import { createStackNavigator } from "@react-navigation/stack";
-
-const isUserLogged = true;
-
-const Stack = createStackNavigator();
+import AuthContext from "./app/config/AuthContext";
+import AuthMainScreen from "./app/screens/AuthMainScreen";
 
 export default function App() {
+  const [isUserLogged, setUserLogged] = useState(true);
+
   return (
-    <NavigationContainer>
-      {isUserLogged ? (
-        <MainScreen />
-      ) : (
-        <View style={styles.container}>
-          {/* <RegisterScreen /> */}
-          {/* <LoginScreen /> */}
-          {/* <Verification /> */}
-          {/* <ForgetPassword /> */}
-          {/* <ResetPassword /> */}
-          <ProfileShop />
-          <StatusBar style="auto" />
-        </View>
-      )}
-    </NavigationContainer>
+    <AuthContext.Provider value={{ isUserLogged, setUserLogged }}>
+      <NavigationContainer>
+        {isUserLogged ? <MainScreen /> : <AuthMainScreen />}
+      </NavigationContainer>
+    </AuthContext.Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // backgroundColor: "#fff",
-    // alignItems: "center",
-    justifyContent: "center",
-  },
-});
